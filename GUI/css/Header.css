@@ -1,0 +1,182 @@
+@import url('../css/reset.css');
+@import url('../css/font.css');
+
+:root{
+       --color-main : #A0D2D8;
+}
+body{
+       margin: 0;
+}
+header{
+       display: flex;
+       justify-content: space-around;
+       height: 86px;
+}
+header .logo{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding-right: 30px;
+}
+header .menubar ul{
+       display: flex;
+       width: 500px;
+       height: 86px;
+       justify-content: space-evenly;
+       align-items: center;
+}
+header .menubar ul li a{
+       font-family: "robotoMedium";
+       font-size: 14px;
+       text-decoration: none;
+       color: black;
+       line-height: 24px;
+       font-weight: 500;
+       transition: 0.25s;
+}
+header .menubar ul li a:hover{
+       color: var(--color-main);
+}
+header .cart{
+       position: relative;
+}
+header .number-cart{
+       font-family: "robotoMedium";
+       font-size: 14px;
+       color: aliceblue;
+       position: absolute;
+       top: -5px;
+       right: -13px;
+       display: flex;
+       background-color: var(--color-main);
+       padding: 3px;
+       height: 13px;
+       border-radius: 100px;
+       justify-content: center;
+       align-items: center;
+}
+header .search{
+       position: relative;
+}
+header .search .box-search{
+       display: none;
+       position: absolute;
+       z-index: 100;
+       right: 0;
+       width: 250px;
+       background-color: white;
+       top: 30px;
+       opacity: 1;
+       transition: 0.5s;
+}
+header .search .box-search input{
+       font-family: "robotoMedium";
+       height: 30px;
+       width: 250px;
+}
+header .search .box-search .result-search .item a{
+       display: flex;
+       align-items: center;
+       margin-bottom: 8px;
+       padding-bottom: 5px;
+       border-bottom: 1px solid grey;
+}
+header .search .box-search .result-search .item img{
+       width: 50px;
+       margin-right: 20px;
+}
+header .search .box-search .result-search{
+       overflow: scroll;
+       overflow-x: hidden;
+       /* height: 140px; */
+       scrollbar-width: thin; /* Kích thước của thanh cuộn */
+       scrollbar-color: #888 #f4f4f4; /* Màu sắc của thanh cuộn */
+}
+header .search .box-search .not-found-item{
+       box-sizing: border-box;
+       position: relative;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       padding-top: 10px;
+       padding-bottom: 10px;
+}
+
+header .search .box-search .not-found-item span:nth-child(1){
+       font-family: 'robotoMedium';
+       color: darkgrey;
+       opacity: 0.5;
+}
+header .search .box-search .not-found-item span:nth-child(2){
+       padding-top: 10px;
+       opacity: 0.2;
+       font-size: 50px;
+       
+}
+
+header .menubar .user:hover .user-name{
+       color: var(--color-main);
+}
+
+header .menubar .user-infor{
+       margin-left: 30px;
+}
+header .menubar .user-infor .user-name{
+       padding-left: 10px;
+}
+
+
+
+
+
+
+.user  {
+       position: relative;
+}
+
+.menu-user {
+       display: none;
+       opacity: 0;
+       transition: 0.5s;
+       border: 1px solid #dbd6d6;
+       border-radius: 2px;
+       /* padding: 10px; */
+       z-index: 1000;
+       top: 31px;
+       position: absolute;
+       right: 0;
+       background-color: #fdfdfd;
+}
+
+.menu-user::before {
+       top: -14px;
+       position: absolute;
+       content: "";
+       display: block;
+       width: 123px;
+       height: 13px;
+}
+
+.menu-user a {
+       padding: 5px 25px;
+}
+
+header .menubar ul li:last-child:hover .menu-user{
+       display: block;
+       opacity: 1;
+       color: black;
+} 
+
+header .menubar ul li:last-child .menu-user a:hover {
+       color: var(--color-main);
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+/* Tùy chỉnh giao diện checkbox và input */
+.form-check-input {
+    /* Tăng kích thước checkbox */
+    transform: scale(1.4);
+}
+
+.form-control {
+    /* Tăng kích thước input */
+    width: 100px;
+}
+.form-check{
+    display: flex !important;
+    align-items: center;
+}
+.form-vis{
+    padding:.5rem;
+}
+
+.img-thumbnail {
+    max-width: 100px;
+    max-height: 110px;
+}

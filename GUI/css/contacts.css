@@ -1,0 +1,68 @@
+@import url('../css/font.css');
+
+a {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.body {
+    font-family: "robotoMedium", Arial, Helvetica, sans-serif;
+}
+
+.path {
+    background-color: rgb(240, 240, 240);
+}
+
+.path-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 5%;
+    padding: 18px 0px;
+}
+
+.path-container li>a {
+    color: #5b5b5c;
+}
+
+.path-container li>a:hover {
+    color: #2b2b2b;
+}
+
+.path-container li:first-child::after {
+    content: "/";
+    font-size: 14px;
+    opacity: 25%;
+    padding: 0 8px 0 5px;
+}
+
+.title-contact {
+    margin: 3% 0px 2% 0px;
+}
+
+.content-page {
+    width: 80%;
+    padding-bottom: 60px;
+}
+
+.left-content h3 {
+    font-weight: 550;
+}
+
+/* .right-content{
+       margin-top:6%;
+   } */
+.map {
+    width: 100%;
+    height: 450px;
+}
+
+.form-control {
+    margin: 2% 0px;
+    border-radius: 10px;
+}
+
+.left-content .btn {
+    padding: 5px 25px;
+    border-radius: 10px;
+}

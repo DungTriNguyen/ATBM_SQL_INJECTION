@@ -1,0 +1,204 @@
+:root {
+       --theme-color: #1F2323;
+       --title-color: #051b35;
+       --text-color: #333333;
+}
+
+/* reset code */
+html {
+       scroll-behavior: smooth;
+}
+
+body,
+html {
+       margin: 0;
+       padding: 0;
+       color: #585858;
+}
+
+* {
+       box-sizing: border-box;
+       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.wrapper {
+       width: 100%;
+       padding-right: 15px;
+       padding-left: 15px;
+       margin-right: auto;
+       margin-left: auto;
+}
+
+@media (min-width: 576px) {
+       .wrapper {
+              max-width: 540px;
+       }
+}
+
+@media (min-width: 768px) {
+       .wrapper {
+              max-width: 720px;
+       }
+}
+
+@media (min-width: 992px) {
+       .wrapper {
+              max-width: 960px;
+       }
+}
+
+@media (min-width: 1200px) {
+       .wrapper {
+              max-width: 1140px;
+       }
+}
+
+.d-grid {
+       display: grid;
+}
+
+.d-flex {
+       display: flex;
+       display: -webkit-flex;
+       flex-wrap: wrap;
+}
+
+.text-center {
+       text-align: center;
+}
+
+.text-left {
+       text-align: left;
+}
+
+.text-right {
+       text-align: right;
+}
+
+button,
+input,
+select {
+       -webkit-appearance: none;
+       outline: none;
+}
+
+button,
+.btn,
+select {
+       cursor: pointer;
+}
+
+a {
+       text-decoration: none;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+       margin: 0;
+       padding: 0;
+}
+
+h3 {
+       font-size: 25px !important;
+       font-weight: bold !important;
+       margin-bottom: 1.5rem !important;
+       color: black !important;
+}
+
+.form-container {
+       position: absolute;
+       top: 50%;
+       left: 25%;
+       transform: translate(-50%, -50%);
+       max-width: 370px;
+       width: 370px;
+       height: 515px;
+       background-color: white;
+       padding: 2rem;
+       border-radius: 4px;
+       transition: all 0.3s ease-in-out;
+       margin-left: .75rem;
+}
+
+.background {
+       background-image: linear-gradient(to right, rgba(40, 0, 26, 0.25), rgba(255, 255, 255, 0)), url(../image/signup.jpg);
+       background-size: cover;
+       background-position: top;
+       position: fixed;
+       /* transform: scaleX(-1); */
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       z-index: -1;
+}
+
+.form-icon {
+       position: relative;
+}
+
+.form-icon input,
+.form-icon select {
+       padding-left: 35px;
+}
+
+.form-icon i {
+       position: absolute;
+       left: 10px;
+       top: 10px;
+       color: black;
+}
+
+.login-note {
+       text-align: center;
+       margin-top: 10px;
+}
+
+.login-note::before {
+       content: '';
+       display: block;
+       width: 100%;
+       height: 1px;
+       background-color: rgba(0, 0, 0, 0.2);
+       margin-bottom: 10px;
+}
+
+#step1 button:hover,
+#step2 button:hover {
+       color: black !important;
+       background-color: white !important;
+}
+
+.login-note a:hover {
+       text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+       .form-container {
+              left: 50%;
+              width: 90%;
+              padding: 10px;
+       }
+
+       .form-icon i {
+              top: 15px;
+       }
+
+       .form-icon input,
+       .form-icon select {
+              padding-left: 40px;
+       }
+
+       .login-note::before {
+              margin-bottom: 5px;
+       }
+}

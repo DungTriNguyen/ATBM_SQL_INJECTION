@@ -1,0 +1,244 @@
+body {
+    width: 1108px;
+    height: 536px;
+
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: #ffffff;
+    margin: 0 auto; /* Để căn giữa trang */
+    padding: 20px; /* Thêm khoảng cách giữa nội dung và lề trang */
+}
+
+header {
+    margin-bottom: 20px; /* Thêm khoảng cách giữa header và main */
+
+    background-color: #ffffff; /* Đổi màu nền thành trắng */
+    color: #000000; /* Đổi màu chữ thành đen */
+    margin-bottom: 20px; /* Thêm khoảng cách giữa header và main */
+}
+
+body > header > a{
+    
+    border-radius: 3px;
+    padding: 9px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.tim-kiem {
+    margin-bottom: 20px; /* Thêm khoảng cách giữa form tìm kiếm và bảng danh sách */
+}
+
+
+table {
+    width: 100%; /* Đảm bảo bảng sẽ đầy đủ chiều rộng của khung chứa */
+    border-collapse: collapse; /* Gộp viền của các ô */
+}
+.tim-kiem input[type="text"]{
+    width: 300px; /* Độ rộng mong muốn */
+    /* Thêm các thuộc tính CSS khác tùy thuộc vào nhu cầu của bạn */
+}
+th, td {/* Header Styles */
+    header {
+        background-color: #fff;
+        color: #000;
+        padding: 20px 0;
+        text-align: center;
+    }
+    
+    header h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+    
+    header a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    
+    /* Main Styles */
+    main {
+        padding: 20px;
+    }
+    
+
+    
+    .danh-sach {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* Thêm thuộc tính này để đảm bảo các cột có chiều rộng cố định */
+    }
+    
+    .danh-sach th,
+    .danh-sach td {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    
+    .danh-sach th {
+        background-color: #f8f9fa;
+    }
+    
+    .danh-sach tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    
+    .danh-sach a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    
+    .danh-sach a:hover {
+        text-decoration: underline;
+    }
+    .phanquyen{
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: .2rem;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        box-shadow: none;
+        text-decoration: none;
+       
+    }
+    .phanquyen:hover{
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+        text-decoration: none;
+    }
+    
+    
+    .edit-button {
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: .2rem;
+        color: #1f2d3d;
+        background-color: #ffc107;
+        border-color: #ffc107;
+        box-shadow: none;
+    }
+    .delete-button{
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        line-height: 1.5;
+        border-radius: .2rem;
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+        box-shadow: none;
+        text-decoration: none;
+    }
+    .delete-button:hover{
+        color: #fff;
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    
+    
+    .edit-button:hover {
+        color: #1f2d3d;
+        background-color: #e0a800;
+        border-color: #d39e00;
+        text-decoration: none;
+    }
+
+    
+    .phan-trang {
+        margin-top: 20px;
+        text-align: center;
+        width:100%
+    }
+    
+    .phan-trang a {
+        display: inline-block;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 5px;
+        margin-right: 5px;
+        text-decoration: none;
+    }
+    
+    .phan-trang a:hover {
+        background-color: #0056b3;
+    }
+    
+}
+th, td {
+    padding: 8px;
+    text-align: center; /* Đổi từ "text-align: left;" thành "text-align: center;" để căn giữa nội dung trong ô */
+    border: 1px solid #dddddd;
+}
+
+
+th {
+    background-color: #f2f2f2; /* Màu nền cho tiêu đề bảng */
+}
+
+.edit-button {
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+    margin-right: 10px; /* Thêm khoảng cách giữa các nút */
+}
+
+.edit-button:hover {
+
+    cursor: pointer; /* Biến con trỏ thành hình bàn tay khi di chuột qua nút */
+}
+
+.phan-trang {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    position: absolute;
+    right: 7px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width:100%;
+  }
+  
+  .phan-trang a {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    
+  }
+  
+  .phan-trang a:hover {
+    background-color: #ddd;
+  }
+  
+  .phan-trang a.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .phan-trang a.disabled {
+    opacity: 0.5;
+  }
+.tim-kiem input[type="text"] {
+    padding: 10px;
+    width: 987px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.tim-kiem {
+    margin-bottom: 20px;
+}
+
+.tim-kiem button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.back-button-container a {
+    text-decoration: none;
+    color: #0069d9;
+}

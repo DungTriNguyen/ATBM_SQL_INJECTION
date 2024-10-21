@@ -1,0 +1,70 @@
+@import url('../css/reset.css');
+
+:root{
+       --color-main : #A0D2D8;
+}
+
+footer{
+       box-sizing: border-box;
+       height: 362px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: space-evenly;
+       background-color: #EFEFEF;
+}
+footer .logo{
+       padding-top: 20px;
+}
+footer .social ul{
+       display: flex;
+       width: 230px;
+       justify-content: space-evenly;
+}
+footer .social ul li a{
+       color: gray;
+       text-decoration: none;
+       font-size: 18px;
+       transition: 0.25s;
+}
+footer .social ul li a:hover{
+       color: var(--color-main);
+}
+footer .list-infor{
+       display: flex;
+       width: 1170px;
+       justify-content: space-between;
+}
+
+footer .list-infor .map, footer .list-infor .phone, footer .list-infor .mail, footer .list-infor .time-open{
+       box-sizing: border-box;
+       background-color: white;
+       width: 270px;
+       height: 118px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       padding-left: 15px;
+       padding-top: 30px;
+       padding-right: 15px;
+       padding-bottom: 30px;
+}
+footer .list-infor .map .icon-map, footer .list-infor .icon-phone, footer .list-infor .icon-mail, footer .list-infor .icon-time-open{
+       margin-bottom: 5px;
+       color: gray;
+       font-size: 18px;
+}
+footer .list-infor .map .infor-map span, footer .list-infor .mail .infor-mail span, footer .list-infor .phone .infor-phone span,footer .list-infor .time-open .infor-time-open span{
+       font-family: "robotoMedium";
+       font-size: 13px;
+       color: #2B2B2B;
+}
+footer .list-infor .map .infor-map span:nth-child(1), footer .list-infor .mail .infor-mail span:nth-child(1), footer .list-infor .phone .infor-phone span:nth-child(1), footer .list-infor .time-open .infor-time-open span:nth-child(1){
+       color: grey;
+}
+footer .author span{
+       font-family: "robotoLight";
+       font-size: 14px;
+}
+
+

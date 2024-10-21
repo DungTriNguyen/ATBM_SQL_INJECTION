@@ -1,0 +1,433 @@
+html, body {
+    margin: 0; height: 100%; overflow-x: hidden;
+    font-family: inherit;
+}
+
+.container-fluid{
+    width: 100%;
+    padding-right: 5.5px;
+    padding-left: 5.5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.admin-header {
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+}
+
+.admin-header-l {
+    width: 50%;
+    float: left;
+}
+
+.header-l {
+    font-size: 1.8rem;
+}
+
+.admin-header-r {
+    float: right;
+}
+
+.header-r-list {
+    display: flex;
+    float: right;
+    padding-top: 7px; 
+    margin-right: 8px;  
+}
+
+/* .header-r-item {
+    
+} */
+
+.header-r-item a{
+    color: #007bff;
+    text-decoration: none;
+}
+
+.header-r-item+.header-r-item::before {
+    display: inline-block;
+    padding:0 0.5rem 0 0.5rem;
+    color: #6c757d;
+    content: "/";
+}
+
+.header-r-item {
+    color: #6c757d;
+    margin-right: 10px;
+}
+
+.admin-filter-top, .admin-filter-bottom {
+    display: flex;
+    height: 60px;
+    margin: 10px 0;
+}
+
+.admin-filter-tleft, .admin-filter-tright {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.filter-t-item {
+    flex-grow: 1;
+}
+
+.filter-t-text {
+    margin-bottom: 5px;
+}
+
+.form-control {
+    display: block;
+    height: 35px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.admin-filter-bleft, .admin-filter-bright {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-right:10px;
+}
+
+.filter-b-item {
+    outline: none;
+}
+
+.filter-b-item30 {
+    width: 30%;
+}
+
+.d-none-btn {
+    display: none;
+}
+
+.filter-b-item100 {
+    width: 100%;
+}
+
+.filter-b-item70 {
+    width: 70%;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.filter-b-btn {
+    display: block;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    height: 48px;
+    cursor: pointer;
+}
+
+.admin-table-list {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.admin-table-list thead th {
+    border-bottom-width: 2px;
+    font-weight: bold;
+}
+.admin-table-list thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.admin-table-list td, .admin-table-list th {
+    border: 1px solid #dee2e6;
+}
+.admin-table-list td, .admin-table-list th {
+    padding: .75rem;
+}
+
+.btn-table-billDetail {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-table-billDetail:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    text-decoration: none;
+}
+
+.btn-table-billUpdate {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #1f2d3d;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    box-shadow: none;
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-table-billUpdate:hover {
+    color: #1f2d3d;
+    background-color: #e0a800;
+    border-color: #d39e00;
+    text-decoration: none;
+}
+
+.admin-pageNav {
+    margin-right: 10px;
+    float: right;
+}
+
+.admin-pageNav-list {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+.admin-pageNav-list .admin-pageNav-item:first-child .admin-pageNav-link {
+    border-top-left-radius: .2rem;
+    border-bottom-left-radius: .2rem;
+}
+
+.admin-pageNav-item:first-child .admin-pageNav-link {
+    margin-left: 0;
+}
+
+.admin-pageNav-list .admin-pageNav-link {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
+.admin-pageNav-link {
+    position: relative;
+    display: block;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+}
+
+.admin-pageNav-link:hover {
+    z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.admin-pageNav-item.active .admin-pageNav-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Bill detail */
+.admin-billDetail-btnAndBack {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-decoration: none;
+}
+
+.admin-billDetail-btnAndBack:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    text-decoration: none;
+}
+
+.form-control{
+    padding: 1.15rem .75rem !important;
+}
+
+/* Admin list detail button */
+/* .admin-container-detail {
+
+} */
+.admin-container-detail span{
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.container-detail-page {
+    margin: 0 70px;
+}
+
+/* Bill update */
+
+.update-label {
+    font-weight: 700;
+}
+
+.bill-update-form {
+    width: 100%;
+    height: auto;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    outline: none;
+    margin: 10px 0 15px 0;
+}
+
+.bill-update-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.bill-update-btn a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.bill-update-btn a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+/* Contact list */
+
+.btn-table-warning {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    box-shadow: none;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+}
+
+.btn-table-warning:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    text-decoration: none;
+}
+
+/* .btn-table-safe {
+    
+}
+
+.admin-contact-noti {
+    
+} */
+
+.admin-contact-notiAccept {
+    background-color: #28A745;
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.admin-contact-notiError {
+    background-color: #dc3545;
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.dis-pointed-hover {
+    cursor: default;
+    pointer-events: none;
+}
+    
+/* Contact list noti */
+
+.filter-b-item50 {
+    width: 100%;
+    height: 48px;
+}
+
+/* Evaluate list */
+.admin-filter-evaluate {
+    display: flex;
+    width: 100%;
+}
+
+.filter-b-item15 {
+    width: 15%;
+    margin: 0 5px;
+}
+
+.filter-b-item30 {
+    width: 30%;
+    margin: 0 5px;
+}
+
+.filter-b-item10 {
+    width: 10%;
+    margin: 0 10px;
+}
+

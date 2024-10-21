@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Màu nền */
+}
+.form-container {
+    width: 100%;
+    max-width: 400px; /* Giới hạn chiều rộng tối đa của form */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Màu nền */
+    border-radius: 5px; /* Cong viền */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Màu nền */
+    border-radius: 5px; /* Cong viền */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Cong viền */
+    box-sizing: border-box; /* Box model */
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Cong viền */
+    background-color: #007bff; /* Màu nền */
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Màu nền khi di chuột */
+}
+
+.btn-secondary {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Cong viền */
+    border: 1px solid #ccc;
+    color: #000;
+}
+
+.btn-secondary:hover {
+    background-color: #f8f9fa; /* Màu nền khi di chuột */
+}
+
+.content-page {
+    margin-top: 50px; /* Khoảng cách với header */
+}
