@@ -112,45 +112,77 @@ async function getListObj() {
 
 //lấy dữ liệu từ kết quả  rearch
 function searchSupplier() {
-  document.getElementById("input-search-supplier").oninput = async function () {
-    try {
-      // Gọi AJAX để xóa payment
-      let str = document
-        .getElementById("input-search-supplier")
-        .value.trim()
-        .toLowerCase();
-      let response = await fetch("../../../BLL/SupplierBLL.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body:
-          "function=" +
-          encodeURIComponent("searchSupplier") +
-          "&str=" +
-          encodeURIComponent(str),
-      });
+  // Lấy tham số 'search' từ URL
+  const urlParams = new URLSearchParams(window.location.search);
+  let str = urlParams.get("search");
 
-      let data = await response.json();
-      if (data.length == 0) {
-        console.log("Không có dữ liệu");
+  // Kiểm tra nếu có tham số 'search' trong URL
+  if (str) {
+    // Cập nhật giá trị cho thẻ input nếu cần
+    document.getElementById("input-search-supplier").value = str;
+    console.log("str : " + str);
 
-        document.querySelector("#Pagination").style.display = "none";
-        loadData(data);
-      } else {
-        console.log(" có dữ liệu");
+    // Gọi hàm xử lý tìm kiếm với giá trị str
+    performSearch(str);
+  }
 
-        loadData(data);
-        document.querySelector("#Pagination").style.display = "flex";
-        loadItem(1, 4);
-      }
-      console.log(data);
+  // Thêm sự kiện để thay đổi URL khi người dùng nhập vào input
+  document.getElementById("input-search-supplier").oninput = function () {
+    let inputStr = document
+      .getElementById("input-search-supplier")
+      .value.trim();
 
-      loadPage();
-    } catch (error) {
-      console.error(error);
+    console.log("change : " + inputStr);
+
+    // Cập nhật URL với giá trị tìm kiếm mới
+    const newUrl = new URL(window.location.href);
+    if (inputStr) {
+      newUrl.searchParams.set("search", inputStr); // Thêm hoặc cập nhật tham số 'search' trong URL
+    } else {
+      newUrl.searchParams.delete("search"); // Xóa tham số 'search' nếu chuỗi rỗng
     }
+
+    // Cập nhật URL mà không tải lại trang
+    window.history.replaceState({}, "", newUrl);
+
+    // Gọi hàm xử lý tìm kiếm với giá trị mới
+    performSearch(inputStr);
   };
+}
+
+// Hàm thực hiện tìm kiếm và gửi dữ liệu qua AJAX đến BLL
+async function performSearch(str) {
+  try {
+    let response = await fetch("../../../BLL/SupplierBLL.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body:
+        "function=" +
+        encodeURIComponent("searchSupplier") +
+        "&str=" +
+        encodeURIComponent(str),
+    });
+
+    let data = await response.json();
+
+    if (!data || data.length === 0 || data.mess === "No data found") {
+      console.log("Không có dữ liệu");
+      document.querySelector("#Pagination").style.display = "none";
+      loadData([]);
+    } else {
+      console.log("Có dữ liệu");
+      loadData(data);
+      document.querySelector("#Pagination").style.display = "flex";
+      loadItem(1, 4);
+    }
+
+    console.log("Dữ liệu đã tải:", data);
+    loadPage();
+  } catch (error) {
+    console.error("Lỗi:", error);
+  }
 }
 
 async function loadData(data) {
