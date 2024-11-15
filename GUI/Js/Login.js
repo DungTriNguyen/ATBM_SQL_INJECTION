@@ -1,12 +1,104 @@
 // location.reload();
 // ------------------------------------- AJAX LOGIN ---------------------------------------------
+// async function Login(event) {
+//   event.preventDefault();
+//   try {
+//     let userName = document.getElementById("userNameInput").value;
+//     let passWord = document.getElementById("passWordInput").value;
+//     //
+//     if (checkFormLogin()) {
+//       const response = await fetch("../../BLL/AccountBLL.php", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded",
+//         },
+//         body:
+//           "function=" +
+//           encodeURIComponent("login") +
+//           "&userName=" +
+//           encodeURIComponent(userName) +
+//           "&passWord=" +
+//           encodeURIComponent(passWord),
+//       });
+//       const data = await response.json();
+
+//       let user = data[0];
+
+//       // Hiển thị thông báo tùy thuộc vào kết quả đăng nhập
+//       if (user.result == "success") {
+//         // alert('Đăng nhập thành công');
+//         // Nếu là tài khoản user
+//         if (user.codePermission == "user") {
+//           await Swal.fire({
+//             position: "center",
+//             icon: "success",
+//             title: "Login Success",
+//             showConfirmButton: false,
+//             timer: 2000,
+//           });
+//           window.location.href = "../../GUI/view/HomePage.php";
+//         }
+//         // Nếu tài khoản khác với user
+//         else {
+//           await Swal.fire({
+//             title: "Do you want to log in with administrator rights?",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Yes, I want!",
+//           }).then(async (result) => {
+//             if (result.isConfirmed) {
+//               await Swal.fire({
+//                 position: "center",
+//                 icon: "success",
+//                 title: "Login Success",
+//                 showConfirmButton: false,
+//                 timer: 2000,
+//               });
+//               window.location.href = "../../GUI/view/admin/Tongquan.php";
+//             }
+//           });
+//         }
+//       } else if (user.result == "block") {
+//         // alert('Tài khoản của bạn bị khóa, vui lòng liên hệ với quản trị viên để mở khóa');
+//         Swal.fire({
+//           icon: "error",
+//           title: "Oops...",
+//           text: "Your account is locked, please contact the administrator to unlock it !",
+//         });
+//       } else if (user.result == "wrongPass") {
+//         // alert('Sai mật khẩu');
+//         Swal.fire({
+//           icon: "error",
+//           title: "Oops...",
+//           text: "Wrong Password!",
+//         });
+//       } else if (user.result == "notFound") {
+//         Swal.fire({
+//           icon: "error",
+//           title: "Oops...",
+//           text: "Account not found!",
+//           footer: `Don't have account ? <a href="../../GUI/view/signup.php">Sign up</a>`,
+//         });
+//         // alert('Không tìm thấy tài khoản');
+//       }
+//     }
+//     // showProductItem(data);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
+
+// Set up hàm js để tấn công
 async function Login(event) {
   event.preventDefault();
   try {
     let userName = document.getElementById("userNameInput").value;
     let passWord = document.getElementById("passWordInput").value;
-    // checkFormLogin()
-    if (true) {
+    // Bỏ qua việc kiểm tra form để dễ dàng thực hiện tấn công
+    // Bằng cách nhập `' OR '1'='1` vào các trường đầu vào
+    if (checkFormLogin()) {
       const response = await fetch("../../BLL/AccountBLL.php", {
         method: "POST",
         headers: {
@@ -14,139 +106,49 @@ async function Login(event) {
         },
         body:
           "function=" +
-          encodeURIComponent("login") +
+          encodeURIComponent("login_secure") +
           "&userName=" +
           encodeURIComponent(userName) +
           "&passWord=" +
           encodeURIComponent(passWord),
       });
       const data = await response.json();
-
-      let user = data[0];
-
-      // Hiển thị thông báo tùy thuộc vào kết quả đăng nhập
-      if (user.result == "success") {
-        // alert('Đăng nhập thành công');
-        // Nếu là tài khoản user
-        if (user.codePermission == "user") {
-          await Swal.fire({
+      // console.log(data[3]);
+      // const responseText = await response.text(); // Thay vì dùng response.json()
+      // console.log(responseText); // Kiểm tra nội dung trả về
+      // const data = JSON.parse(responseText);
+      // console.log("mess=>ok");
+      if (data && data.length > 0) {
+        let user = data[0];
+        if (user.result == "success") {
+          Swal.fire({
             position: "center",
             icon: "success",
-            title: "Login Success",
+            title: "Logged in successfully!",
             showConfirmButton: false,
             timer: 2000,
           });
+          // Điều hướng sau khi đăng nhập thành công
           window.location.href = "../../GUI/view/HomePage.php";
-        }
-        // Nếu tài khoản khác với user
-        else {
-          await Swal.fire({
-            title: "Do you want to log in with administrator rights?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, I want!",
-          }).then(async (result) => {
-            if (result.isConfirmed) {
-              await Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Login Success",
-                showConfirmButton: false,
-                timer: 2000,
-              });
-              window.location.href = "../../GUI/view/admin/Tongquan.php";
-            }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Login failed!",
           });
         }
-      } else if (user.result == "block") {
-        // alert('Tài khoản của bạn bị khóa, vui lòng liên hệ với quản trị viên để mở khóa');
+      } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Your account is locked, please contact the administrator to unlock it !",
+          text: "Invalid response from server!",
         });
-      } else if (user.result == "wrongPass") {
-        // alert('Sai mật khẩu');
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Wrong Password!",
-        });
-      } else if (user.result == "notFound") {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Account not found!",
-          footer: `Don't have account ? <a href="../../GUI/view/signup.php">Sign up</a>`,
-        });
-        // alert('Không tìm thấy tài khoản');
       }
     }
-    // showProductItem(data);
   } catch (error) {
     console.error("Error:", error);
   }
 }
-
-// Set up hàm js để tấn công
-// async function Login(event) {
-//   event.preventDefault();
-//   try {
-//     let userName = document.getElementById("userNameInput").value;
-//     let passWord = document.getElementById("passWordInput").value;
-//     // Bỏ qua việc kiểm tra form để dễ dàng thực hiện tấn công
-//     // Bằng cách nhập `' OR '1'='1` vào các trường đầu vào
-//     const response = await fetch("../../BLL/AccountBLL.php", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//       body:
-//         "function=" +
-//         encodeURIComponent("login") +
-//         "&userName=" +
-//         encodeURIComponent(userName) +
-//         "&passWord=" +
-//         encodeURIComponent(passWord),
-//     });
-//     const data = await response.json();
-//     // console.log(data[3]);
-//     // const responseText = await response.text(); // Thay vì dùng response.json()
-//     // console.log(responseText); // Kiểm tra nội dung trả về
-//     // const data = JSON.parse(responseText);
-//     // console.log("mess=>ok");
-//     if (data && data.length > 0) {
-//       let user = data[0];
-//       if (user.result == "success") {
-//         Swal.fire({
-//           position: "center",
-//           icon: "success",
-//           title: "Logged in successfully!",
-//           showConfirmButton: false,
-//           timer: 2000,
-//         });
-//         // Điều hướng sau khi đăng nhập thành công
-//         window.location.href = "../../GUI/view/HomePage.php";
-//       } else {
-//         Swal.fire({
-//           icon: "error",
-//           title: "Oops...",
-//           text: "Login failed!",
-//         });
-//       }
-//     } else {
-//       Swal.fire({
-//         icon: "error",
-//         title: "Oops...",
-//         text: "Invalid response from server!",
-//       });
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// }
 
 // window.addEventListener('load', function () {
 //        // Xử lý khi toàn bộ trang đã được tải xong
@@ -191,11 +193,15 @@ async function checkLogin() {
 function checkFormLogin() {
   let userName = document.getElementById("userNameInput").value;
   let passWord = document.getElementById("passWordInput").value;
-  // Regular expressions for validation
+  // username
+  // Phải có độ dài từ 5 đến 16 ký tự.
+  // Chỉ chứa các chữ cái (a-z, A-Z) và chữ số (0-9).
   var usernameRegex = /^[a-zA-Z\d]{5,16}$/;
+  // password
+  // Phải có độ dài từ 6 đến 20 ký tự.
+  // Có thể chứa các ký tự chữ cái (a-z, A-Z), chữ số (0-9), và các ký tự đặc biệt @, _, -
   var passwordRegex = /^[a-zA-Z\d@_-]{6,20}$/;
-
-  // Check if the fields are filled correctly
+  // check usename
   if (!usernameRegex.test(userName)) {
     // alert('Vui lòng điền tên đăng nhập hợp lệ từ 5 đến 16 ký tự');
     Swal.fire({
@@ -203,8 +209,9 @@ function checkFormLogin() {
       title: "Oops...",
       text: "Please enter a valid username of 5 to 16 characters!",
     });
-    return false; // Stop the function if the username is not valid
+    return false;
   }
+  // check password
   if (!passwordRegex.test(passWord)) {
     // alert('Vui lòng điền mật khẩu hợp lệ');
     Swal.fire({
@@ -212,7 +219,7 @@ function checkFormLogin() {
       title: "Oops...",
       text: "Please enter a valid password between 6 and 20 characters!",
     });
-    return false; // Stop the function if the password is not valid
+    return false;
   }
   return true;
 }

@@ -179,8 +179,8 @@ class AccountDAL extends AbstractionDAL
 
 
 
-                     // "SELECT * FROM website_sells_clothes_and_bags.accounts WHERE userName = '' 
-                     // OR (SELECT COUNT(*) FROM website_sells_clothes_and_bags.accounts) > 0; -- ' AND passWord = 'anything'";
+                     "SELECT * FROM website_sells_clothes_and_bags.accounts WHERE userName = '' 
+                     OR (SELECT COUNT(*) FROM website_sells_clothes_and_bags.accounts) > 0; -- ' AND passWord = 'anything'";
 
                      $resultCheck = $this->actionSQL->query($check);
 
@@ -271,23 +271,7 @@ class AccountDAL extends AbstractionDAL
               return $this->actionSQL->query($string);
        }
 
-       // Gọi thủ tục đã tạo trên Xampp để kiểm tra tài khoản (username, password)
-       // public function checkLogin($username, $password)
-       // {
-       //        try {
-       //               // Gọi stored procedure usp_login
-       //               $stmt = $this->actionSQL->prepare("CALL usp_login(?, ?)");
-       //               $stmt->bind_param("ss", $username, $password); // Bind parameters
-       //               $stmt->execute();
-       //               $result = $stmt->get_result(); // Lấy kết quả từ stored procedure
 
-       //               // Fetch kết quả mà không cần tham số
-       //               $data = $result->fetch_assoc();
-       //               return $data;
-       //        } catch (mysqli_sql_exception $e) {
-       //               echo "Error: " . $e->getMessage();
-       //        }
-       // }
 
 
 
@@ -340,6 +324,8 @@ class AccountDAL extends AbstractionDAL
 
 
               $sql = "CALL attack_sql_logically_incorrect('$userName', '$passWord')";
+              // $sql = "CALL secure_attack_sql('$userName', '$passWord')";
+
               // In truy vấn ra để xem chuỗi SQL khi tấn công
               // echo "Executing SQL query: " . $sql . "<br>";
 
@@ -390,83 +376,116 @@ class AccountDAL extends AbstractionDAL
               }
        }
 
-       // public function checkLogin_Procedure($userName, $passWord)
-       // {
-       //        // Tạo câu lệnh SQL gọi đến stored procedure
-       //        // $sql = "CALL use_procedure_sql_injection('$userName', '$passWord')";
-       //        $sql = "CALL use_procedure_sql_injection('$userName', '$passWord')";
-       //        // In truy vấn ra để xem chuỗi SQL khi tấn công
-       //        echo "Executing SQL query: " . $sql . "<br>";
-       //        // Thực thi truy vấn
-       //        if ($this->conn->multi_query($sql)) {
-       //               // Lấy kết quả từ truy vấn
-       //               $result = $this->conn->store_result();
-       //               // Kiểm tra nếu có bản ghi nào được trả về
-       //               if ($result && $result->num_rows > 0) {
-       //                      // Lấy dữ liệu từ kết quả
-       //                      $data = $result->fetch_assoc();
-       //                      // Gán giá trị cho các thuộc tính của tài khoản
-       //                      $userName = isset($data['userName']) ? $data['userName'] : null;
-       //                      $passWord = isset($data['passWord']) ? $data['passWord'] : null;
-       //                      // Tạo đối tượng AccountDTO và gán giá trị
-       //                      $account = new AccountDTO(
-       //                             $userName,
-       //                             $passWord,
-       //                             null,   // Các giá trị khác có thể là null hoặc từ cơ sở dữ liệu
-       //                             null,
-       //                             null,
-       //                             null,
-       //                             null,
-       //                             null,
-       //                             null,
-       //                             null,
-       //                             null
-       //                      );
-       //                      // Đóng kết quả
-       //                      $result->free();
-       //                      return $account;
-       //               }
-       //        }
-       //        // Không tìm thấy người dùng
-       //        return null;
-       // }
 
 
+       // Hàm trim() loại bỏ khoảng trắng (spaces) và các ký tự không cần thiết ở đầu và cuối chuỗi.
+       // Ví dụ: nếu input = " Hello World! ", sau khi gọi trim($input), chuỗi trở thành "Hello World!".
+       // strip_tags($input):
 
-       // public function checkLogin_always_true($userName, $passWord)
-       // {
-       //        try {
-       //               // Truy vấn SQL không an toàn, dễ bị tấn công SQL Injection
-       //               $sql = "SELECT * FROM accounts WHERE userName = '$userName' AND passWord = '$passWord'";
+       // Hàm strip_tags() sẽ loại bỏ tất cả các thẻ HTML và PHP khỏi chuỗi đầu vào.
+       // Ví dụ: nếu input = "<script>alert('Hacked!');</script> Hello World!", sau khi gọi strip_tags($input), chuỗi sẽ trở thành " Hello World!".
+       // Điều này giúp ngăn chặn việc chèn mã JavaScript độc hại vào đầu vào (ví dụ như một cuộc tấn công XSS), mà kẻ tấn công có thể dùng để chèn mã vào trang web.
+       // htmlspecialchars($input):
 
-       //               // In truy vấn ra để xem chuỗi SQL khi tấn công
-       //               echo "Executing SQL query: " . $sql . "<br>";
+       // Hàm htmlspecialchars() chuyển các ký tự đặc biệt (như <, >, &, ", ') thành các ký tự HTML an toàn, ví dụ:
+       // < sẽ trở thành &lt;
+       // > sẽ trở thành &gt;
+       // & sẽ trở thành &amp;
+       // Điều này giúp ngăn chặn các cuộc tấn công XSS, nơi kẻ tấn công có thể cố gắng chèn mã HTML hoặc JavaScript vào ứng dụng của bạn.
+       // Ví dụ: nếu input = "<h1>Title</h1>", sau khi gọi htmlspecialchars($input), chuỗi trở thành &lt;h1&gt;Title&lt;/h1&gt;.
+       // Validate input to prevent SQL injection
+       private function validateInput($input)
+       {
+              return htmlspecialchars(strip_tags(trim($input)));
+       }
+       // lấy obj từ database bằng userName
+       function get_obj($userName)
+       {
+              // Xử lý đầu vào để tránh SQL Injection
+              $userNameValidated = $this->validateInput($userName);
 
-       //               // Thực thi truy vấn
-       //               $result = $this->conn->query($sql);
+              // Truy vấn dữ liệu từ cơ sở dữ liệu dựa trên userName
+              $query = "SELECT * FROM accounts WHERE userName = ?";
+              $stmt = $this->actionSQL->prepare($query);
 
-       //               // Kiểm tra nếu có bản ghi nào được trả về
-       //               if ($result && $result->num_rows > 0) {
-       //                      // Lấy dữ liệu từ kết quả
-       //                      $data = $result->fetch_assoc();
+              // Liên kết tham số với truy vấn đã chuẩn bị
+              $stmt->bind_param('s', $userNameValidated);
+              $stmt->execute();
+              $result = $stmt->get_result();
 
-       //                      // Tạo đối tượng AccountDTO và gán giá trị
-       //                      $userName = $data['userName'] ?? null;
-       //                      $passWord = $data['passWord'] ?? null;
-       //                      $account = new AccountDTO($userName, $passWord, null, null, null, null, null, null, null, null, null);
+              // Kiểm tra và trả về thông tin người dùng nếu tồn tại
+              if ($data = $result->fetch_assoc()) {
+                     return new AccountDTO(
+                            $data["userName"],
+                            $data["passWord"], // PassWord sẽ được kiểm tra sau này trong hàm login_secure
+                            $data["dateCreated"],
+                            $data["accountStatus"],
+                            $data["name"],
+                            $data["address"],
+                            $data["email"],
+                            $data["phoneNumber"],
+                            $data["birth"],
+                            $data["sex"],
+                            $data["codePermissions"]
+                     );
+              }
+              // Đóng câu lệnh chuẩn bị và trả về null nếu không tìm thấy
+              $stmt->close();
+              return null;
+       }
+       // chặn sql injection
+       function add_obj($obj)
+       {
+              if ($obj != null) {
+                     $userNameValidated = $this->validateInput($obj->getUsername());
 
-       //                      // Trả về đối tượng AccountDTO
-       //                      return $account;
-       //               } else {
-       //                      // Không tìm thấy người dùng
-       //                      return null;
-       //               }
-       //        } catch (mysqli_sql_exception $e) {
-       //               // Xử lý lỗi SQL
-       //               error_log("SQL Error: " . $e->getMessage());
-       //               return null;
-       //        }
-       // }
+                     // Check if the username already exists
+                     $checkQuery = "SELECT * FROM accounts WHERE userName = ?";
+                     $stmt = $this->actionSQL->prepare($checkQuery);
+                     $stmt->bind_param('s', $userNameValidated);
+                     $stmt->execute();
+                     $resultCheck = $stmt->get_result();
+
+                     if ($resultCheck->num_rows < 1) {
+                            $createDate = $obj->getDateCreate();
+                            $passWord_hash = $obj->getPassword();
+                            $accountStatus = $obj->getAccountStatus();
+                            $name = $obj->getName();
+                            $address = $obj->getAddress();
+                            $email = $obj->getEmail();
+                            $phoneNumber = $obj->getPhoneNumber();
+                            $birthdate = $obj->getBirth();
+                            $sex = $obj->getSex();
+                            $codePermission = $obj->getCodePermission();
+
+                            // Insert the new user
+                            $insertQuery = "INSERT INTO accounts 
+                                            (userName, passWord, dateCreated, accountStatus, name, address, email, phoneNumber, birth, sex, codePermissions) 
+                                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                            $stmt = $this->actionSQL->prepare($insertQuery);
+                            $stmt->bind_param(
+                                   'sssssssssss',
+                                   $userNameValidated,
+                                   $passWord_hash,
+                                   $createDate,
+                                   $accountStatus,
+                                   $name,
+                                   $address,
+                                   $email,
+                                   $phoneNumber,
+                                   $birthdate,
+                                   $sex,
+                                   $codePermission
+                            );
+
+                            if ($stmt->execute()) {
+                                   return true;
+                            }
+                     }
+                     $stmt->close();
+              }
+              return false;
+       }
 }
 
 // check
@@ -509,7 +528,7 @@ class AccountDAL extends AbstractionDAL
 //        $accountDAL = new AccountDAL();
 
 //        // ' OR '1'='1 --
-//        $userName = "' OR '1'='1 -- ";
+// $userName = "' OR '1'='1 -- ";
 //        $passWord = '123456';
 //        $result = $accountDAL->checkLogin_always_true($userName, $passWord);
 //        // Hiển thị kết quả
@@ -533,9 +552,9 @@ class AccountDAL extends AbstractionDAL
 
 //        // Test with some sample data
 //        // ' OR '1'='1 --
-//        // $userName = "MzEyMTU2MDAyMQ==";
-//        // $passWord = 'MTIzNDU=';
-//        $userName = "' OR '1'='1 -- ";
+// $userName = "MzEyMTU2MDAyMQ==";
+// $passWord = 'MTIzNDU=';
+       // $userName = "' OR '1'='1 -- ";
 //        $passWord = "' OR '1'='1";
 
 //        // Call the checkLogin method and get the result

@@ -1305,3 +1305,57 @@ END$$
 DELIMITER ;
 
 
+
+
+
+
+-- defences
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `secure_sql`(IN `p_userName` VARCHAR(255), IN `p_passWord` VARCHAR(255))
+BEGIN
+    -- Kiểm tra và xác nhận đầu vào để tránh giá trị NULL hoặc không hợp lệ
+    IF p_userName IS NULL OR p_passWord IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid input parameters';
+    END IF;
+
+    -- Kiểm tra chiều dài của tên người dùng và mật khẩu (ví dụ, không quá 255 ký tự)
+    IF LENGTH(p_userName) > 255 OR LENGTH(p_passWord) > 255 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Input parameters too long';
+    END IF;
+
+    -- Kiểm tra tên người dùng và mật khẩu không chứa ký tự đặc biệt (tùy chọn, nếu cần)
+    -- Bạn có thể viết thêm các biểu thức chính quy để kiểm tra đầu vào theo yêu cầu
+
+    -- So sánh mật khẩu với mật khẩu đã mã hóa (ví dụ, giả sử mật khẩu đã được mã hóa trong DB)
+    -- SELECT * FROM accounts
+    -- WHERE userName = p_userName AND passWord = SHA2(p_passWord, 256);
+    
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+
+-- Tạo stored procedure an toàn với tên là secure_attack_sql
+CREATE DEFINER=`root`@`localhost` PROCEDURE `secure_attack_sql`(
+    IN `p_userName` VARCHAR(255),  -- Tham số đầu vào p_userName kiểu VARCHAR
+    IN `p_passWord` VARCHAR(255)   -- Tham số đầu vào p_passWord kiểu VARCHAR
+)
+BEGIN
+    -- Kiểm tra tính hợp lệ của đầu vào để tránh NULL hoặc giá trị không hợp lệ
+    IF p_userName IS NULL OR p_passWord IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid input parameters';
+    ELSEIF LENGTH(p_userName) > 255 OR LENGTH(p_passWord) > 255 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Input parameters too long';
+    END IF;
+
+    -- Truy vấn dữ liệu bằng cách sử dụng câu lệnh SQL chuẩn mà không dùng câu lệnh động
+    SELECT * 
+    FROM accounts 
+    WHERE userName = p_userName 
+      AND passWord = p_passWord;  -- So sánh mật khẩu không mã hóa
+
+END$$
+-- Khôi phục DELIMITER về trạng thái mặc định
+DELIMITER ;

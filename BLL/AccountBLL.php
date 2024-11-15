@@ -147,117 +147,145 @@ class AccountBLL
        }
 
        // login
+       // function login($userName, $passWord)
+       // {
+       //        // truy suất tài khoản trong csdl dựa theo userName
+       //        $user = $this->AccountDAL->getobj($userName);
+       //        $result = array();
+       //        // 5 trường hợp
+       //        // đăng nhập sai pass
+       //        // Đăng nhập thành công và quyền là user
+       //        // Đăng nhập thanh công và quyền la admin
+       //        // Đăng nhập không thành công do tài khoản bị khóa
+       //        // Đăng nhập không thành công do chưa có tài khoản
+
+       //        // kiểm tra xem kết quả truy suất có trả về null không
+       //        // nếu có -> chưa có tài khoản
+       //        if ($user != null) {
+
+       //               // nếu đăng nhập không sai pass
+       //               if ($user->getUsername() === $userName && $user->getPassword() === $passWord) {
+       //                      // lấy thông tin thuộc tính user
+       //                      $dateCreate = $user->getDateCreate();
+       //                      $accountStatus = $user->getAccountStatus();
+       //                      $name = $user->getName();
+       //                      $address = $user->getAddress();
+       //                      $email = $user->getEmail();
+       //                      $phoneNumber = $user->getPhoneNumber();
+       //                      $birth = $user->getBirth();
+       //                      $sex = $user->getSex();
+       //                      $codePermission = $user->getCodePermission();
+       //                      if ($accountStatus === '1') {
+
+       //                             // start session
+       //                             if (session_start()) {
+       //                                    $_SESSION['username'] = $userName;
+       //                                    $_SESSION['passWord'] = $passWord;
+       //                                    $_SESSION['dateCreate'] = $dateCreate;
+       //                                    $_SESSION['accountStatus'] = $accountStatus;
+       //                                    $_SESSION['name'] = $name;
+       //                                    $_SESSION['address'] = $address;
+       //                                    $_SESSION['email'] = $email;
+       //                                    $_SESSION['phoneNumber'] = $phoneNumber;
+       //                                    $_SESSION['birth'] = $birth;
+       //                                    $_SESSION['sex'] = $sex;
+       //                                    $_SESSION['codePermission'] = $codePermission;
+       //                                    $_SESSION['result'] = "success";
+       //                             }
+       //                             $obj = array(
+       //                                    "userName" => $userName,
+       //                                    "passWord" => $passWord,
+       //                                    "dateCreate" => $dateCreate,
+       //                                    "accountStatus" => $accountStatus,
+       //                                    "name" => $name,
+       //                                    "address" => $address,
+       //                                    "email" => $email,
+       //                                    "phoneNumber" => $phoneNumber,
+       //                                    "birth" => $birth,
+       //                                    "sex" => $sex,
+       //                                    "codePermission" => $codePermission,
+       //                                    "result" => "success"
+
+       //                             );
+       //                             array_push($result, $obj);
+       //                             return $result;
+       //                      } else {
+       //                             $obj = array(
+       //                                    "result" => "block"
+       //                             );
+       //                             array_push($result, $obj);
+       //                             return $result;
+       //                      }
+       //               } else {
+       //                      $obj = array(
+       //                             "result" => "wrongPass",
+       //                             "username" => $user->getUsername(),
+       //                             "email" => $user->getEmail()
+       //                      );
+       //                      array_push($result, $obj);
+       //                      return $result;
+       //               }
+       //        } else {
+       //               $obj = array(
+       //                      "result" => "notFound"
+       //               );
+       //               array_push($result, $obj);
+       //               return $result;
+       //        }
+       // }
+
+
+       // Viết lại hàm login theo cheklogin ở lớp DAL để chuyển sang cho js
        function login($userName, $passWord)
        {
               // truy suất tài khoản trong csdl dựa theo userName
-              $user = $this->AccountDAL->getobj($userName);
+              // $user = $this->AccountDAL->checkLogin_Procedure($userName, $passWord);
+              $user = $this->AccountDAL->checkLogin_always_true($userName, $passWord);
               $result = array();
-              // 5 trường hợp
-              // đăng nhập sai pass
-              // Đăng nhập thành công và quyền là user
-              // Đăng nhập thanh công và quyền la admin
-              // Đăng nhập không thành công do tài khoản bị khóa
-              // Đăng nhập không thành công do chưa có tài khoản
+              if ($user !== null) {
+                     $userName = $user->getUsername();
+                     $passWord = $user->getPassword();
+                     $obj = array(
+                            "userName" => $userName,
+                            "passWord" => $passWord,
+                            "result" => "success"
+                     );
+                     array_push($result, $obj);
+              } else {
+                     $obj = array(
+                            "result" => "notFound"
+                     );
+                     array_push($result, $obj);
+              }
+              return $result;
+       }
 
-              // kiểm tra xem kết quả truy suất có trả về null không
-              // nếu có -> chưa có tài khoản
+
+       function login_secure($userName, $passWord)
+       {
+              $user = $this->AccountDAL->get_obj($userName);
+              $result = array();
+
               if ($user != null) {
-
-                     // nếu đăng nhập không sai pass
-                     if ($user->getUsername() === $userName && $user->getPassword() === $passWord) {
-                            // lấy thông tin thuộc tính user
-                            $dateCreate = $user->getDateCreate();
-                            $accountStatus = $user->getAccountStatus();
-                            $name = $user->getName();
-                            $address = $user->getAddress();
-                            $email = $user->getEmail();
-                            $phoneNumber = $user->getPhoneNumber();
-                            $birth = $user->getBirth();
-                            $sex = $user->getSex();
-                            $codePermission = $user->getCodePermission();
-                            if ($accountStatus === '1') {
-
-                                   // start session
-                                   if (session_start()) {
-                                          $_SESSION['username'] = $userName;
-                                          $_SESSION['passWord'] = $passWord;
-                                          $_SESSION['dateCreate'] = $dateCreate;
-                                          $_SESSION['accountStatus'] = $accountStatus;
-                                          $_SESSION['name'] = $name;
-                                          $_SESSION['address'] = $address;
-                                          $_SESSION['email'] = $email;
-                                          $_SESSION['phoneNumber'] = $phoneNumber;
-                                          $_SESSION['birth'] = $birth;
-                                          $_SESSION['sex'] = $sex;
-                                          $_SESSION['codePermission'] = $codePermission;
-                                          $_SESSION['result'] = "success";
-                                   }
-                                   $obj = array(
-                                          "userName" => $userName,
-                                          "passWord" => $passWord,
-                                          "dateCreate" => $dateCreate,
-                                          "accountStatus" => $accountStatus,
-                                          "name" => $name,
-                                          "address" => $address,
-                                          "email" => $email,
-                                          "phoneNumber" => $phoneNumber,
-                                          "birth" => $birth,
-                                          "sex" => $sex,
-                                          "codePermission" => $codePermission,
-                                          "result" => "success"
-
-                                   );
-                                   array_push($result, $obj);
-                                   return $result;
-                            } else {
-                                   $obj = array(
-                                          "result" => "block"
-                                   );
-                                   array_push($result, $obj);
-                                   return $result;
-                            }
-                     } else {
+                     $hashedPassword = $user->getPassword();
+                     $userName = $user->getUsername();
+                     // Verify password using password_verify
+                     if (password_verify($passWord, $hashedPassword)) {
                             $obj = array(
-                                   "result" => "wrongPass",
-                                   "username" => $user->getUsername(),
-                                   "email" => $user->getEmail()
+                                   "userName" => $userName,
+                                   "passWord" => $hashedPassword,
+                                   "result" => "success"
                             );
                             array_push($result, $obj);
-                            return $result;
                      }
               } else {
                      $obj = array(
                             "result" => "notFound"
                      );
                      array_push($result, $obj);
-                     return $result;
               }
+              return $result;
        }
-
-
-       //Viết lại hàm login theo cheklogin ở lớp DAL để chuyển sang cho js
-       // function login($userName, $passWord)
-       // {
-       //        // truy suất tài khoản trong csdl dựa theo userName
-       //        $user = $this->AccountDAL->checkLogin_Procedure($userName, $passWord);
-       //        $result = array();
-       //        if ($user !== null) {
-       //               $userName = $user->getUsername();
-       //               $passWord = $user->getPassword();
-       //               $obj = array(
-       //                      "userName" => $userName,
-       //                      "passWord" => $passWord,
-       //                      "result" => "success"
-       //               );
-       //               array_push($result, $obj);
-       //        } else {
-       //               $obj = array(
-       //                      "result" => "notFound"
-       //               );
-       //               array_push($result, $obj);
-       //        }
-       //        return $result;
-       // }
 
        // thêm một tài khoản vào database
        function addAccount($userName, $passWord, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission)
@@ -265,6 +293,30 @@ class AccountBLL
               $obj = new AccountDTO($userName, $passWord, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission);
               $result = array();
               $check = $this->AccountDAL->addobj($obj);
+              if ($check == true) {
+                     $obj = array(
+                            "result" => "success"
+                     );
+                     array_push($result, $obj);
+                     return $result;
+              } else {
+                     $obj = array(
+                            "result" => "false"
+                     );
+                     array_push($result, $obj);
+                     return $result;
+              }
+       }
+
+
+       // Add a new account to the database
+       function add_Account($userName, $passWord, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission)
+       {
+              // Hash password using password_hash
+              $hashedPassword = password_hash($passWord, PASSWORD_DEFAULT);
+              $obj = new AccountDTO($userName, $hashedPassword, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission);
+              $result = array();
+              $check = $this->AccountDAL->add_obj($obj);
               if ($check == true) {
                      $obj = array(
                             "result" => "success"
@@ -355,6 +407,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      $temp = $check->login($userName, $passWord);
                      echo json_encode($temp);
                      break;
+              case 'login_secure':
+                     $userName = $_POST['userName'];
+                     $passWord = $_POST['passWord'];
+                     $temp = $check->login_secure($userName, $passWord);
+                     echo json_encode($temp);
+                     break;
               case 'checkLogin':
                      $temp = $check->checkLogin();
                      echo json_encode($temp);
@@ -381,6 +439,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      $sex = $_POST['sex'];
                      $codePermission = $_POST['codePermission'];
                      $temp = $check->addAccount($userName, $passWord, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission);
+                     echo json_encode($temp);
+                     break;
+              case 'add_Account':
+                     $userName = $_POST['userName'];
+                     $passWord = $_POST['passWord'];
+                     $dateCreate = $_POST['dateCreate'];
+                     $accountStatus = $_POST['accountStatus'];
+                     $name = $_POST['name'];
+                     $address = $_POST['address'];
+                     $email = $_POST['email'];
+                     $phoneNumber = $_POST['phoneNumber'];
+                     $birth = $_POST['birth'];
+                     $sex = $_POST['sex'];
+                     $codePermission = $_POST['codePermission'];
+                     $temp = $check->add_Account($userName, $passWord, $dateCreate, $accountStatus, $name, $address, $email, $phoneNumber, $birth, $sex, $codePermission);
                      echo json_encode($temp);
                      break;
               case 'updateAccount':
